@@ -1,0 +1,5 @@
+test
+/Code/SDL2-2.0.8/VisualC/*.db
+/Code/SDL2-2.0.8/VisualC/.vs/SDL/v14/*.suo
+/Code/SDL2-2.0.8/*.sh
+/Code/SDL2-2.0.8/*.cmake
