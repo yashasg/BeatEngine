@@ -3,3 +3,9 @@ test
 /Code/SDL2-2.0.8/VisualC/.vs/SDL/v14/*.suo
 /Code/SDL2-2.0.8/*.sh
 /Code/SDL2-2.0.8/*.cmake
+/.vs/SDL_BeatEngine/v14/*.suo
+/Code/SDL2_image-2.0.3/VisualC/x64/Debug/*.obj
+/Code/.vs/SDL_BeatEngine/v14/*.suo
+/Code/SDL2_image-2.0.3/VisualC/*.db
+*.tlog
+*.suo
