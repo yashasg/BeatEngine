@@ -26,19 +26,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -117,6 +117,15 @@
       <AdditionalLibraryDirectories>$(BinDir)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake />
+    <CustomBuildStep>
+      <Command>copy "$(ProjectDir)external\lib\x64\zlib1.dll" "$(BinDir)zlib1.dll" /y
+copy "$(ProjectDir)external\lib\x64\libpng16-16.dll" "$(BinDir)libpng16-16.dll" /y
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying SDL Image required DLLs</Message>
+      <Outputs>$(BinDir)$(TargetFileName)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -147,6 +156,15 @@
       <AdditionalLibraryDirectories>$(BinDir)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake />
+    <CustomBuildStep>
+      <Command>copy "$(ProjectDir)external\lib\x64\zlib1.dll" "$(BinDir)zlib1.dll" /y
+copy "$(ProjectDir)external\lib\x64\libpng16-16.dll" "$(BinDir)libpng16-16.dll" /y
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying SDL Image required DLLs</Message>
+      <Outputs>$(BinDir)$(TargetFileName)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -174,6 +192,15 @@
       <AdditionalLibraryDirectories>$(BinDir)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake />
+    <CustomBuildStep>
+      <Command>copy "$(ProjectDir)external\lib\x64\zlib1.dll" "$(BinDir)zlib1.dll" /y
+copy "$(ProjectDir)external\lib\x64\libpng16-16.dll" "$(BinDir)libpng16-16.dll" /y
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying SDL Image required DLLs</Message>
+      <Outputs>$(BinDir)$(TargetFileName)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -201,6 +228,15 @@
       <AdditionalLibraryDirectories>$(BinDir)</AdditionalLibraryDirectories>
     </Link>
     <Bscmake />
+    <CustomBuildStep>
+      <Command>copy "$(ProjectDir)external\lib\x64\zlib1.dll" "$(BinDir)zlib1.dll" /y
+copy "$(ProjectDir)external\lib\x64\libpng16-16.dll" "$(BinDir)libpng16-16.dll" /y
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Copying SDL Image required DLLs</Message>
+      <Outputs>$(BinDir)$(TargetFileName)</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\IMG.c">

@@ -11,7 +11,9 @@
     <ScriptDir>$(SolutionDir)Scripts\</ScriptDir>
     <SourceLicenseDir>$(SolutionDir)Licenses\</SourceLicenseDir>
     <TargetLicenseDir>$(GameDir)licenses\</TargetLicenseDir>
+	<CodeDir>$(SolutionDir)Code</CodeDir>
 	<SDLDir>$(SolutionDir)Code\SDL2-2.0.8\</SDLDir>
+	<SDLImageDir>$(SolutionDir)Code\SDL2_image-2.0.3\</SDLImageDir>
   </PropertyGroup>
   <ItemGroup>
     <BuildMacro Include="TempDir">
@@ -52,6 +54,14 @@
     </BuildMacro>
 	<BuildMacro Include="SDLDir">
       <Value>$(SDLDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+	<BuildMacro Include="SDLImageDir">
+      <Value>$(SDLImageDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+		<BuildMacro Include="CodeDir">
+      <Value>$(CodeDir)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
