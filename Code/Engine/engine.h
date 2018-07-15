@@ -26,7 +26,7 @@ virtual int             sprintf( char*         buffer ,
                              const char*   format ,
                              ... );                // Platform safe sprintf.
 
-virtual uint32_t        GetAppTime( void );        // Get the application time.
+virtual float           GetAppTime( void );        // Get the application time in seconds.
 virtual uint32_t        GetRealTime( void );       // Get real time.
 
 virtual bool            IsKeyPressed( int       Key );// Check if a key is pressed.

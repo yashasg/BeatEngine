@@ -65,14 +65,15 @@ void app::Kill( )
 void app::Update(float DeltaTime)
 {
     SDL_Event Event;
-    SDL_PollEvent( &Event );
-    switch ( Event.type )
-    {
-        case SDL_QUIT:
-            m_Quit = true;
-            break;
-        default:
-            break;
+    while(SDL_PollEvent( &Event ))
+    {   switch ( Event.type )
+        {
+            case SDL_QUIT:
+                m_Quit = true;
+                break;
+            default:
+                break;
+        }
     }
 }
 

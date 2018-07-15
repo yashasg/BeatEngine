@@ -22,7 +22,7 @@
         app*            g_TheApp;
 
         engine*         Engine = NULL;                        // The Engine.
-        uint32_t        s_AppTime=0;
+        float           s_AppTimeS=0;
         SDL_Renderer*   m_pRenderer;
 //==============================================================================
 // TinyEngineMain
@@ -55,12 +55,12 @@ int TinyEngineMain( app* App, const char * pTitle ,
 
     // Main loop.
     uint32_t RealStart = Engine->GetRealTime( );
+    uint32_t FrameTime = 1000 / FPS_LIMIT;
     while ( !g_TheApp->m_Quit )
     {
         // Determine the delta time using "real" time.
         uint32_t NewRealStart = Engine->GetRealTime( );
         uint32_t DeltaTime = NewRealStart - RealStart;
-        uint32_t FrameTime = 1000 / FPS_LIMIT;
         RealStart = NewRealStart;
 
         // If the delta time is too large, then we want to constrain it.
@@ -72,17 +72,20 @@ int TinyEngineMain( app* App, const char * pTitle ,
         }
 
         // Advance the application time.
-        s_AppTime += DeltaTime;
+        float DeltaTimeS= ( ( float ) DeltaTime ) / 1000.0f;
+        s_AppTimeS += DeltaTimeS;
 
         // Update.
-        g_TheApp->Update( ((float)DeltaTime)/1000.0f );
+        g_TheApp->Update( DeltaTimeS );
 
         // Render.
         g_TheApp->Render();
         
         // Cap frame rate
         uint32_t DelayMS= FrameTime - DeltaTime;
-        SDL_Delay( DelayMS );
+        // Strange Bug: SDL_Delay only waits for half the delay
+        // Doubling it to maintain 60FPS 
+        SDL_Delay( DelayMS*2 );
     }
 
     g_TheApp->Kill( );
@@ -139,11 +142,12 @@ int engine::sprintf( char*        buffer ,
 
 //==============================================================================
 // GetAppTime
+// Returns TimeElapsed since app started in seconds.
 //==============================================================================
 
-uint32_t engine::GetAppTime( void )
+float engine::GetAppTime( void )
 {
-    return( s_AppTime );
+    return( s_AppTimeS );
 }
 
 //==============================================================================
