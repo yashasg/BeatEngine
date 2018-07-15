@@ -3,15 +3,11 @@
 //==============================================================================
 
 #include "app.h"
-#include <assert.h>
 #include <stdint.h>
 
 //==============================================================================
 //  DEFINES
 //==============================================================================
-
-#undef ASSERT
-#define ASSERT( _expr_ )  assert( _expr_ )
 
 //==============================================================================
 //  TYPES
@@ -49,18 +45,16 @@ extern engine* Engine;
 // entry point definition.
 //
 
-#define TINY_ENGINE_MAIN( App, Title,Xpos, Ypos, Width, Height, Fullscreen )\
+#define TINY_ENGINE_MAIN( App, Title, Width, Height, Fullscreen )\
                                                                             \
     {                                                                       \
         return TinyEngineMain( App,                                         \
                                Title,                                       \
-                               Xpos,                                        \
-                               Ypos,                                        \
                                Width,                                       \
                                Height,                                      \
                                Fullscreen );                                \
     }                                                                       \
 
-int TinyEngineMain( app* App,const char * pTitle , int Xpos , int Ypos , int Width , int Height , bool Fullscreen );
+int TinyEngineMain( app* App,const char * pTitle , int Width , int Height , bool Fullscreen );
 
 //------------------------------------------------------------------------------

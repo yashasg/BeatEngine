@@ -23,14 +23,12 @@
 
         engine*         Engine = NULL;                        // The Engine.
         uint32_t        s_AppTime=0;
-        SDL_Window*     m_pWindow;
         SDL_Renderer*   m_pRenderer;
 //==============================================================================
 // TinyEngineMain
 //==============================================================================
 
-int TinyEngineMain( app* App, const char * pTitle , int Xpos , int Ypos , 
-                    
+int TinyEngineMain( app* App, const char * pTitle , 
                     int Width,int Height , bool Fullscreen )
 {
     DEJA_CONTEXT( "TinyEngineMain" );
@@ -38,42 +36,14 @@ int TinyEngineMain( app* App, const char * pTitle , int Xpos , int Ypos ,
     g_TheApp=App;
     // Create subsystems.
     Engine = ( engine* )new engine;
-
+    int WindowPos= SDL_WINDOWPOS_CENTERED;
     // Call application initialization.
-    g_TheApp->Init( );
-
-    int Flags = 0;
-    if ( Fullscreen )
-    {
-        Flags = SDL_WINDOW_FULLSCREEN;
-    }
-    if ( SDL_Init( SDL_INIT_EVERYTHING ) == 0 )
-    {
-        DEJA_CONTEXT( "SDL Initialized!..." );
-
-        m_pWindow = SDL_CreateWindow( pTitle , Xpos , Ypos , Width , Height , Flags );
-        if ( m_pWindow )
-        {
-            DEJA_CONTEXT( "Window Created!..." );
-        }
-        m_pRenderer = SDL_CreateRenderer( m_pWindow , -1 , 0 );
-        if ( m_pRenderer )
-        {
-            SDL_SetRenderDrawColor( m_pRenderer , 244 , 150 , 10 , 255 );
-            DEJA_CONTEXT( "Renderer Created!..." );
-        }
-        /*SDL_Surface* pSurface = IMG_Load( "../../../../Assets/testsprite.png" );
-        s_pEnemy = SDL_CreateTextureFromSurface( m_pRenderer , pSurface );
-        SDL_FreeSurface( pSurface );*/
-        g_TheApp->m_Quit = false;
-    }
-    else
-    {
-        g_TheApp->m_Quit = true;
-    }
-
-    // Call Logic with a 10ms time step to fully initialize.
-    g_TheApp->Update( 0.01f );
+    g_TheApp->Init( pTitle , WindowPos , WindowPos , Width , Height ,                           Fullscreen );
+    //    /*SDL_Surface* pSurface = IMG_Load( "../../../../Assets/testsprite.png" );
+    //    s_pEnemy = SDL_CreateTextureFromSurface( m_pRenderer , pSurface );
+    //    SDL_FreeSurface( pSurface );*/
+    //    g_TheApp->m_Quit = false;
+    //}
 
     //** By forcing a flush, we trigger the DejaLib to go ahead and connect with
     //** Insight.  You wouldn't normally do this, but, since the connection
@@ -90,14 +60,15 @@ int TinyEngineMain( app* App, const char * pTitle , int Xpos , int Ypos ,
         // Determine the delta time using "real" time.
         uint32_t NewRealStart = Engine->GetRealTime( );
         uint32_t DeltaTime = NewRealStart - RealStart;
+        uint32_t FrameTime = 1000 / FPS_LIMIT;
         RealStart = NewRealStart;
 
         // If the delta time is too large, then we want to constrain it.
         // This prevents huge delta time values when the app is hung up on
         // a break point or is being dragged.
-        if ( DeltaTime > ( 1000 / FPS_LIMIT ) )
+        if ( DeltaTime > FrameTime  )
         {
-            DeltaTime = ( 1000 / FPS_LIMIT );
+            DeltaTime = FrameTime;
         }
 
         // Advance the application time.
@@ -106,18 +77,16 @@ int TinyEngineMain( app* App, const char * pTitle , int Xpos , int Ypos ,
         // Update.
         g_TheApp->Update( ((float)DeltaTime)/1000.0f );
 
+        // Render.
         g_TheApp->Render();
-        SDL_RenderClear( m_pRenderer );
-        //do stuff
-        //SDL_RenderCopy( m_pRenderer , s_pEnemy , NULL , &s_pEnemyRect );
-        SDL_RenderPresent( m_pRenderer );
+        
+        // Cap frame rate
+        uint32_t DelayMS= FrameTime - DeltaTime;
+        SDL_Delay( DelayMS );
     }
 
     g_TheApp->Kill( );
     
-    SDL_DestroyRenderer( m_pRenderer );
-    SDL_DestroyWindow( m_pWindow );
-    SDL_Quit( );
 
     delete Engine;
     Engine = NULL;

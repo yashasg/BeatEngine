@@ -90,20 +90,6 @@ object::~object( void )
 
 //==============================================================================
 
-const vector2& object::GetPosition( void )
-{
-    return( m_Position );
-}
-
-//==============================================================================
-
-void object::SetPosition( const vector2& V )
-{
-    m_Position = V;
-}
-
-//==============================================================================
-
 int object::GetID( void )
 {
     return( m_Id );

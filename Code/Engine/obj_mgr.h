@@ -1,5 +1,4 @@
 #pragma once
-#include "vector2.h"
 class obj_mgr;
 class type_data;
 //==============================================================================
@@ -14,7 +13,6 @@ class object
 {
 private:
         int         m_Id;
-        vector2     m_Position;
         type_data*  m_pTypeData;
         object*     m_pNext;
         object*     m_pPrev;
@@ -26,8 +24,6 @@ virtual     void     OnRender       ( )                      { };
 virtual     void     OnRemove       ( )                      { };
 virtual     void     OnDejaObjInit  ( )                      { };
             int      GetID          ( );
-const	    vector2& GetPosition    ( );
-            void	 SetPosition    ( const vector2& V );
 friend	    class obj_mgr;
 };
 
@@ -79,15 +75,6 @@ public:
         void        RemoveDestroy( int               ID );
         void        RemoveDestroy( object*           pObject );
         void        RemoveDestroyAll( void );
-        int         GetClosest( object*           pObject ,
-                       const char*       pTypeName );
-
-        void        ApplyDamage( const vector2&    Position ,
-                                 int               OwnerID ,
-                                 int               Damage ,
-                                 float             InnerRadius ,
-                                 float             OuterRadius );
-
         void        Update( float             DeltaTime );
         void        Render( void );
 

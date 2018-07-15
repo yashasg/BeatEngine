@@ -1,31 +1,32 @@
-#pragma once
 //==============================================================================
 //  INCLUDES
 //==============================================================================
 
-#include <assert.h>
+#include "Game.h"
+#include "../Engine/engine.h"
 
 //==============================================================================
 //  DEFINES
 //==============================================================================
 
-#undef ASSERT
-#define ASSERT( _expr_ )  assert( _expr_ )
+#define WINDOW_CENTERED 0
 
 //==============================================================================
-//  TYPES
+//  STORAGE
 //==============================================================================
 
-class app
+Game s_Game;
+
+//==============================================================================
+//  FUNCTIONS - main
+//==============================================================================
+
+int main(int argc, char *argv[])
 {
-public:
-            app     () { m_Quit = false; };
-virtual	    ~app    () { };
-virtual void Init   ( const char * pTitle , int Xpos , int Ypos ,
-                      int Width , int Height , bool Fullscreen );
-virtual void Kill   ();
-virtual void Update  (float DeltaTime);
-virtual void Render ();
+    const char* Title="2DDemo";
+    TINY_ENGINE_MAIN( &s_Game, Title , 800 , 600 , false);
+	
+	return 0;
+}
 
-        bool m_Quit;
-};
+//==============================================================================
